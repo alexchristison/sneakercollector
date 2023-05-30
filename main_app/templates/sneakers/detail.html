@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Sneaker Details</h1>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ sneaker.name }}</span>
+        <p>Brand: {{ sneaker.brand }}</p>
+        <p>Description: {{ sneaker.description|linebreaks }}</p>
+        {% if sneaker.year > 1875 %}
+            <p>Year: {{ sneaker.year }}</p>
+        {% else %}
+            <p>Year: Lol, Polly wears old shoes!!</p>
+        <!-- <p>Year: Sneakers not invented until 1876+</p> -->
+        {% endif %}            
+    </div>
+</div>
+
+{% endblock %}

@@ -1,10 +1,13 @@
 from django.shortcuts import render
+from .models import Sneaker
 
 # Baby step - usually a Model is used 
-sneakers = [
-  {'name': 'Air Jordan IV', 'brand': 'Nike', 'description': 'blue and white', 'year': 1989},
-  {'name': 'Air Tech Challenge 2', 'brand': 'Nike', 'description': 'Aka - Air Agassi. Hot Lava. ', 'year': 1990},
-]
+# sneakers = [
+#   {'name': 'Air Jordan IV', 'brand': 'Nike', 'description': 'blue and white', 'year': 1989},
+#   {'name': 'Air Tech Challenge 2', 'brand': 'Nike', 'description': 'Aka - Air Agassi. Hot Lava. ', 'year': 1990},
+#   {'name': 'Polly Shoes', 'brand': 'Zacks', 'description': 'Fugly', 'year': 1822 },
+# 
+# ]
 # Create your views here.
 # Define the home view
 def home(request):
@@ -15,6 +18,13 @@ def about(request):
   return render(request, 'about.html')
 
 def sneakers_index(request):
+  sneakers = Sneaker.objects.all()
   return render(request, 'sneakers/index.html', {
     'sneakers': sneakers
   }) # see comment related in urls.py re: index vs sneakers_index
+
+def sneakers_detail(request, sneaker_id):
+  sneaker = Sneaker.objects.get(id=sneaker_id)
+  return render(request, 'sneakers/detail.html', {
+    'sneaker': sneaker
+  })

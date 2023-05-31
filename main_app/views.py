@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Sneaker
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
 
 # Baby step - usually a Model is used 
 # sneakers = [
@@ -28,3 +30,15 @@ def sneakers_detail(request, sneaker_id):
   return render(request, 'sneakers/detail.html', {
     'sneaker': sneaker
   })
+
+class SneakerCreate(CreateView):
+  model = Sneaker
+  fields = '__all__'
+
+class SneakerUpdate(UpdateView):
+  model = Sneaker
+  fields = '__all__'
+
+class SneakerDelete(DeleteView):
+  model = Sneaker
+  success_url = '/sneakers'

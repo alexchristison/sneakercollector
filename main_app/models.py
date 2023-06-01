@@ -1,6 +1,12 @@
 from django.db import models
 from django.urls import reverse
 
+USAGE = (
+    ('W', 'Walk'),
+    ('S', 'Sport'),
+    ('O', 'Office'),
+)
+
 # Create your models here.
 class Sneaker(models.Model):
     name = models.CharField(max_length=100)
@@ -16,3 +22,23 @@ class Sneaker(models.Model):
     
     def get_absolute_url(self):
         return reverse('detail', kwargs={'sneaker_id': self.id})
+    
+class Worn(models.Model):
+    date = models.DateField('date worn')
+    usage = models.CharField(
+        max_length=1,
+        choices=USAGE,
+        default=USAGE[0][0]
+    )
+    # Create a sneaker_id FK
+    sneaker = models.ForeignKey(
+        Sneaker,
+        on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return f"{self.get_usage_display()} on {self.date}"
+    
+    class Meta:
+        ordering = ['-date']
+

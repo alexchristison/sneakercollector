@@ -8,6 +8,17 @@ USAGE = (
 )
 
 # Create your models here.
+class Sock(models.Model):
+    name = models.CharField(max_length=50)
+    color = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('socks_details', kwargs={'pk': self.id})
+
+
 class Sneaker(models.Model):
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)

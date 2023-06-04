@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Sneaker
+from .models import Sneaker, Sock
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import WornForm
+from django.views.generic import ListView, DetailView
+
 
 
 # Baby step - usually a Model is used 
@@ -57,3 +59,21 @@ def add_worn(request, sneaker_id):
     new_worn.sneaker_id = sneaker_id
     new_worn.save()
   return redirect('detail', sneaker_id=sneaker_id)
+
+class SockList(ListView):
+  model = Sock
+
+class SockDetail(DetailView):
+  model = Sock
+
+class SockCreate(CreateView):
+  model = Sock
+  fields = '__all__'
+
+class SockUpdate(UpdateView):
+  model = Sock
+  fields = ['name', 'color']
+
+class SockDelete(DeleteView):
+  model = Sock
+  success_url = '/socks'

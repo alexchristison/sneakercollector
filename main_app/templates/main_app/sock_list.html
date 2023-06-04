@@ -4,7 +4,7 @@
 <h1>Sock List</h1>
 
 {% for sock in sock_list %}
-  <a href="{% url 'socks_detail' sock.id %}">
+  <a href="{% url 'socks_details' sock.id %}">
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ sock.name }}</span>
